@@ -31,9 +31,71 @@
   </header>
 
   <!-- Page content -->
-  <main>
-    <h1>Welcome to Toy Haven</h1>
-    <p>Your one-stop shop for fun toys and games.</p>
+  <main class="home-page">
+
+    <!-- Hero banner slider -->
+    <section class="hero">
+      <div class="hero-slider">
+
+        <div class="hero-slide active">
+          <div class="hero-content">
+            <h1>Figurines Collection</h1>
+            <p>Action figures, knights, and collectibles for every adventure.</p>
+            <a href="products.html" class="btn btn-primary">Shop Now</a>
+          </div>
+        </div>
+
+        <div class="hero-slide">
+          <div class="hero-content">
+            <h1>Fun Toys for Everyone</h1>
+            <p>Blocks, plushies, RC cars, and more to spark imagination.</p>
+            <a href="products.html" class="btn btn-primary">Shop Now</a>
+          </div>
+        </div>
+
+        <div class="hero-slide">
+          <div class="hero-content">
+            <h1>Board Games Night</h1>
+            <p>Family-friendly games for game nights and rainy days.</p>
+            <a href="products.html" class="btn btn-primary">Shop Now</a>
+          </div>
+        </div>
+
+        <div class="hero-slide">
+          <div class="hero-content">
+            <h1>Diecast Cars</h1>
+            <p>Collectible cars and trucks in detailed 1:64 scale.</p>
+            <a href="products.html" class="btn btn-primary">Shop Now</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Small dots to show which slide is active -->
+      <div class="hero-dots">
+        <button class="hero-dot active" aria-label="Slide 1"></button>
+        <button class="hero-dot" aria-label="Slide 2"></button>
+        <button class="hero-dot" aria-label="Slide 3"></button>
+        <button class="hero-dot" aria-label="Slide 4"></button>
+      </div>
+    </section>
+
+    <!-- Featured products -->
+    <section class="featured-section">
+      <h2>Featured Products</h2>
+      <p class="section-intro">Hand-picked favourites from our store.</p>
+      <div id="featured-products" class="product-grid">
+        <!-- Product cards are added here by home.js -->
+      </div>
+    </section>
+
+    <!-- Call to action -->
+    <section class="cta-section">
+      <h2>Explore Our Full Range</h2>
+      <p>Browse all 20 products across figurines, toys, board games, and diecast cars.</p>
+      <a href="products.html" class="btn btn-primary">Shop All Products</a>
+    </section>
+
   </main>
 
   <!-- Footer -->
@@ -70,6 +132,7 @@
     </div>
   </footer>
 
+  <script src="js/data.js"></script>
   <script src="js/nav.js"></script>
   <script src="js/home.js"></script>
 </body>
