@@ -31,9 +31,99 @@
   </header>
 
   <!-- Page content -->
-  <main>
+  <main class="feedback-page">
     <h1>Feedback</h1>
-    <p>We would love to hear from you.</p>
+    <p class="page-intro">We would love to hear from you.</p>
+
+    <!-- Confirmation message after submit -->
+    <div id="success-message" class="success-message" hidden>
+      <h2>Thank you!</h2>
+      <p>Your feedback has been submitted. We appreciate you taking the time to share your thoughts.</p>
+    </div>
+
+    <!-- Feedback form -->
+    <form id="feedback-form" class="feedback-form" novalidate>
+      <h2>Send Us a Message</h2>
+
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name">
+        <span class="error-text" id="error-name"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email">
+        <span class="error-text" id="error-email"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" placeholder="Write your message here"></textarea>
+        <span class="error-text" id="error-message"></span>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit Feedback</button>
+    </form>
+
+    <!-- FAQ accordion section -->
+    <section class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="accordion">
+
+        <div class="accordion-item">
+          <button class="accordion-question" type="button">
+            How do I place an order?
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-answer">
+            <p>Browse our products page, add items to your cart, and proceed to checkout. Fill in your details and click Place Order to complete your purchase.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-question" type="button">
+            What payment methods do you accept?
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-answer">
+            <p>We accept card payments and cash on delivery. You can choose your preferred method during checkout.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-question" type="button">
+            How long does delivery take?
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-answer">
+            <p>Standard delivery usually takes 3 to 5 business days. Delivery times may vary depending on your location.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-question" type="button">
+            Can I return a product?
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-answer">
+            <p>Yes, unused items in original packaging can be returned within 14 days of delivery. Contact us through the feedback form to start a return.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-question" type="button">
+            How do I use the wishlist?
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-answer">
+            <p>Click Add to Wishlist on any product to save it. Visit the Wishlist page to view saved items and update their status to Interested, Owned, or Not Interested.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
   </main>
 
   <!-- Footer -->
