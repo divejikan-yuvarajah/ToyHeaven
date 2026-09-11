@@ -82,38 +82,33 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-// Function to build one product card element
+// Build one product card element for the featured section
 function createProductCard(product) {
   var card = document.createElement('div');
   card.className = 'product-card';
 
-  // Product image
+  // Product image with descriptive alt text for accessibility
   var img = document.createElement('img');
   img.src = product.image;
-  img.alt = product.name;
+  img.alt = product.name + ' - ' + product.category;
 
-  // Card body wrapper
   var body = document.createElement('div');
   body.className = 'product-card-body';
 
-  // Product name
   var title = document.createElement('h3');
   title.textContent = product.name;
 
-  // Product price (show 2 decimal places)
   var price = document.createElement('p');
   price.className = 'product-price';
   price.textContent = '$' + product.price.toFixed(2);
 
-  // Add to Cart button
   var button = document.createElement('button');
   button.className = 'btn btn-primary';
   button.textContent = 'Add to Cart';
   button.addEventListener('click', function () {
-    addToCart(product.id);
+    addToCart(product.id, product.name);
   });
 
-  // Put everything together
   body.appendChild(title);
   body.appendChild(price);
   body.appendChild(button);
@@ -125,9 +120,8 @@ function createProductCard(product) {
 }
 
 
-// Simple function to add a product to the cart in localStorage
-function addToCart(productId) {
-  // Get existing cart from localStorage, or start with an empty array
+// Add a product to the cart in localStorage
+function addToCart(productId, productName) {
   var cart = JSON.parse(localStorage.getItem('cart'));
   if (cart === null) {
     cart = [];
@@ -148,8 +142,25 @@ function addToCart(productId) {
     cart.push({ id: productId, quantity: 1 });
   }
 
-  // Save back to localStorage
   localStorage.setItem('cart', JSON.stringify(cart));
 
-  alert('Added to cart!');
+  // Show a small confirmation message (same style as products page)
+  showToast(productName + ' added to cart!');
+}
+
+
+// Show a small message at the bottom of the screen
+function showToast(message) {
+  var toast = document.getElementById('cart-toast');
+  if (!toast) {
+    return;
+  }
+
+  toast.textContent = message;
+  toast.hidden = false;
+
+  // Hide the message after 2.5 seconds
+  setTimeout(function () {
+    toast.hidden = true;
+  }, 2500);
 }

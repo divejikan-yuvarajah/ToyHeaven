@@ -34,7 +34,7 @@ var urlsToCache = [
   'images/products/placeholder.jpg'
 ];
 
-// Install: save core files into the cache
+// Install event: runs once when the service worker is first installed
 self.addEventListener('install', function (event) {
   event.waitUntil(
     caches.open(CACHE_NAME).then(function (cache) {
@@ -43,7 +43,7 @@ self.addEventListener('install', function (event) {
   );
 });
 
-// Fetch: try cache first, then network if not found
+// Fetch event: try cache first, then network if not found (cache-first strategy)
 self.addEventListener('fetch', function (event) {
   event.respondWith(
     caches.match(event.request).then(function (cachedResponse) {

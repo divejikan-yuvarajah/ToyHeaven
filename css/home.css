@@ -90,30 +90,6 @@
   background-color: var(--color-accent);
 }
 
-/* Shared button style for home page */
-.btn {
-  display: inline-block;
-  padding: var(--spacing-xs) var(--spacing-md);
-  border-radius: 6px;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.95rem;
-  text-align: center;
-  cursor: pointer;
-  border: none;
-  text-decoration: none;
-}
-
-.btn-primary {
-  background-color: var(--color-accent);
-  color: var(--color-white);
-}
-
-.btn-primary:hover {
-  background-color: #e56a1f;
-  color: var(--color-white);
-}
-
 /* Featured products section */
 .featured-section {
   max-width: 1100px;
@@ -128,8 +104,6 @@
 
 .section-intro {
   text-align: center;
-  color: #555;
-  margin-bottom: var(--spacing-lg);
 }
 
 .product-grid {
@@ -153,7 +127,7 @@
   width: 100%;
   height: 180px;
   object-fit: cover;
-  background-color: #eee;
+  background-color: var(--color-image-bg);
 }
 
 .product-card-body {
@@ -196,11 +170,25 @@
 }
 
 .cta-section p {
-  color: #555;
+  color: var(--color-muted);
   margin-bottom: var(--spacing-md);
 }
 
-/* Mobile adjustments */
+/* Tablet */
+@media (max-width: 1024px) {
+  .featured-section,
+  .cta-section,
+  .hero {
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+
+/* Mobile */
 @media (max-width: 768px) {
   .hero-slider {
     height: 280px;

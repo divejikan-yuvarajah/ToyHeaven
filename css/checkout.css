@@ -2,30 +2,6 @@
    Toy Haven - Checkout page styles
    ============================================ */
 
-.checkout-page h1 {
-  margin-bottom: var(--spacing-xs);
-}
-
-.page-intro {
-  color: #555;
-  margin-bottom: var(--spacing-lg);
-}
-
-/* Empty cart message */
-.empty-checkout {
-  text-align: center;
-  padding: var(--spacing-xl) var(--spacing-sm);
-  background-color: var(--color-white);
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  box-shadow: var(--shadow-sm);
-}
-
-.empty-checkout p {
-  margin-bottom: var(--spacing-md);
-  color: #666;
-}
-
 /* Success message with fade-in */
 .success-message {
   text-align: center;
@@ -43,7 +19,7 @@
 }
 
 .success-message p {
-  color: #555;
+  color: var(--color-muted);
   margin-bottom: var(--spacing-md);
 }
 
@@ -111,20 +87,6 @@
   outline-offset: 1px;
 }
 
-.form-group input.input-error,
-.form-group textarea.input-error {
-  border-color: #cc0000;
-}
-
-/* Inline error text */
-.error-text {
-  display: block;
-  color: #cc0000;
-  font-size: 0.85rem;
-  margin-top: 4px;
-  min-height: 1.2em;
-}
-
 /* Radio buttons */
 .radio-group {
   display: flex;
@@ -180,7 +142,7 @@
 }
 
 .summary-item-qty {
-  color: #666;
+  color: var(--color-muted-light);
 }
 
 .summary-item-price {
@@ -203,31 +165,25 @@
   font-size: 1.2rem;
 }
 
-/* Buttons */
-.btn {
-  display: inline-block;
-  padding: var(--spacing-xs) var(--spacing-md);
-  border-radius: 6px;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.95rem;
-  text-align: center;
-  cursor: pointer;
-  border: none;
-  text-decoration: none;
-}
-
 .checkout-form .btn-primary {
   width: 100%;
   margin-top: var(--spacing-sm);
 }
 
-.btn-primary {
-  background-color: var(--color-accent);
-  color: var(--color-white);
+/* Tablet: stack summary below form */
+@media (max-width: 1024px) {
+  .checkout-layout {
+    flex-direction: column;
+  }
+
+  .order-summary {
+    width: 100%;
+  }
 }
 
-.btn-primary:hover {
-  background-color: #e56a1f;
-  color: var(--color-white);
+/* Mobile */
+@media (max-width: 768px) {
+  .success-message {
+    padding: var(--spacing-lg) var(--spacing-sm);
+  }
 }

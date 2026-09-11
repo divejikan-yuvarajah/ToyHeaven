@@ -98,9 +98,10 @@ function createProductCard(product) {
   var card = document.createElement('div');
   card.className = 'product-card';
 
+  // Product image with descriptive alt text for accessibility
   var img = document.createElement('img');
   img.src = product.image;
-  img.alt = product.name;
+  img.alt = product.name + ' - ' + product.category;
 
   var body = document.createElement('div');
   body.className = 'product-card-body';
@@ -208,11 +209,8 @@ function showCartToast(message) {
 
   toast.textContent = message;
   toast.hidden = false;
-  toast.classList.add('show');
-
   // Hide the message after 2.5 seconds
   setTimeout(function () {
     toast.hidden = true;
-    toast.classList.remove('show');
   }, 2500);
 }

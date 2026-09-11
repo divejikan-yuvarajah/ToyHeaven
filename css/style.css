@@ -14,6 +14,11 @@
   --color-white: #ffffff;
   --color-border: #dddddd;
   --color-footer-bg: #f0ece6;
+  --color-muted: #555555;
+  --color-muted-light: #666666;
+  --color-error: #cc0000;
+  --color-accent-hover: #e56a1f;
+  --color-image-bg: #eeeeee;
 
   --font-heading: 'Poppins', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
@@ -86,6 +91,101 @@ main {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: var(--spacing-lg) var(--spacing-sm);
+}
+
+/* Shared page heading styles used on all inner pages */
+main h1 {
+  margin-bottom: var(--spacing-xs);
+}
+
+.page-intro,
+.section-intro {
+  color: var(--color-muted);
+  margin-bottom: var(--spacing-lg);
+}
+
+.section-intro {
+  text-align: center;
+}
+
+/* Shared button styles used across pages */
+.btn {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: 6px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: var(--color-accent);
+  color: var(--color-white);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-accent-hover);
+  color: var(--color-white);
+}
+
+.btn-secondary {
+  background-color: var(--color-white);
+  color: var(--color-primary);
+  border: 1px solid var(--color-border);
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-primary);
+  background-color: rgba(46, 26, 71, 0.05);
+  color: var(--color-primary);
+}
+
+/* Shared empty-state box (cart, wishlist, checkout) */
+.empty-state {
+  text-align: center;
+  padding: var(--spacing-xl) var(--spacing-sm);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+}
+
+.empty-state p {
+  margin-bottom: var(--spacing-md);
+  color: var(--color-muted-light);
+  font-size: 1.05rem;
+}
+
+/* Shared inline form error text */
+.error-text {
+  display: block;
+  color: var(--color-error);
+  font-size: 0.85rem;
+  margin-top: 4px;
+  min-height: 1.2em;
+}
+
+.form-group input.input-error,
+.form-group textarea.input-error {
+  border-color: var(--color-error);
+}
+
+/* Shared toast notification (cart, wishlist on products/home) */
+.cart-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: 6px;
+  box-shadow: var(--shadow-md);
+  font-size: 0.95rem;
+  z-index: 200;
 }
 
 /* ============================================
@@ -244,7 +344,7 @@ main {
 
 .footer-brand p {
   font-size: 0.9rem;
-  color: #555;
+  color: var(--color-muted);
 }
 
 .footer-links {
@@ -277,7 +377,7 @@ main {
 .footer-newsletter p {
   font-size: 0.9rem;
   margin-bottom: var(--spacing-sm);
-  color: #555;
+  color: var(--color-muted);
 }
 
 .newsletter-form {
@@ -314,13 +414,67 @@ main {
 }
 
 .newsletter-form button:hover {
-  background-color: #e56a1f;
+  background-color: var(--color-accent-hover);
 }
 
 .footer-bottom {
   text-align: center;
   padding: var(--spacing-sm);
   font-size: 0.85rem;
-  color: #666;
+  color: var(--color-muted-light);
   border-top: 1px solid var(--color-border);
+}
+
+/* ============================================
+   Responsive breakpoints (tablet + mobile)
+   ============================================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  main {
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+
+  .footer-container {
+    gap: var(--spacing-md);
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  main {
+    padding: var(--spacing-md) var(--spacing-sm);
+  }
+
+  main h1 {
+    font-size: 1.6rem;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-brand,
+  .footer-links,
+  .footer-newsletter {
+    min-width: 100%;
+    text-align: center;
+  }
+
+  .footer-links ul {
+    align-items: center;
+  }
+
+  .newsletter-form {
+    justify-content: center;
+  }
+
+  .cart-toast {
+    left: var(--spacing-sm);
+    right: var(--spacing-sm);
+    bottom: var(--spacing-sm);
+    text-align: center;
+  }
 }

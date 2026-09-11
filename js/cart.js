@@ -129,10 +129,10 @@ function createCartItemRow(product, quantity, subtotal) {
   var row = document.createElement('div');
   row.className = 'cart-item';
 
-  // Product image
+  // Product image with descriptive alt text for accessibility
   var img = document.createElement('img');
   img.src = product.image;
-  img.alt = product.name;
+  img.alt = product.name + ' product image';
 
   // Name and unit price
   var details = document.createElement('div');

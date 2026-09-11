@@ -90,9 +90,10 @@ function createWishlistCard(product, status) {
   var card = document.createElement('div');
   card.className = 'wishlist-card';
 
+  // Product image with descriptive alt text for accessibility
   var img = document.createElement('img');
   img.src = product.image;
-  img.alt = product.name;
+  img.alt = product.name + ' - ' + product.category;
 
   var body = document.createElement('div');
   body.className = 'wishlist-card-body';

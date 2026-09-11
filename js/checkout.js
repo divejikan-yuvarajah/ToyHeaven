@@ -233,7 +233,7 @@ function saveOrder(order) {
 }
 
 
-// Handle form submission
+// Validate the form, save the order, clear cart, and show success
 function handleSubmit() {
   // Stop if validation fails
   if (validateForm() === false) {

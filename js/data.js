@@ -1,5 +1,6 @@
 // Toy Haven - Product data
 // 20 sample products across 4 categories
+// Used by home, products, cart, checkout, and wishlist pages
 
 const PRODUCTS = [
   // Figurines

@@ -2,15 +2,6 @@
    Toy Haven - Feedback page styles
    ============================================ */
 
-.feedback-page h1 {
-  margin-bottom: var(--spacing-xs);
-}
-
-.page-intro {
-  color: #555;
-  margin-bottom: var(--spacing-lg);
-}
-
 /* Success confirmation message */
 .success-message {
   padding: var(--spacing-md);
@@ -29,7 +20,7 @@
 }
 
 .success-message p {
-  color: #555;
+  color: var(--color-muted);
   font-size: 0.95rem;
 }
 
@@ -87,39 +78,8 @@
   outline-offset: 1px;
 }
 
-.form-group input.input-error,
-.form-group textarea.input-error {
-  border-color: #cc0000;
-}
-
-.error-text {
-  display: block;
-  color: #cc0000;
-  font-size: 0.85rem;
-  margin-top: 4px;
-  min-height: 1.2em;
-}
-
-.btn {
-  display: inline-block;
-  padding: var(--spacing-xs) var(--spacing-md);
-  border-radius: 6px;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.95rem;
-  text-align: center;
-  cursor: pointer;
-  border: none;
-}
-
-.btn-primary {
-  background-color: var(--color-accent);
-  color: var(--color-white);
+.feedback-form .btn-primary {
   width: 100%;
-}
-
-.btn-primary:hover {
-  background-color: #e56a1f;
 }
 
 /* FAQ accordion section */
@@ -183,7 +143,7 @@
 
 .accordion-answer p {
   padding: 0 var(--spacing-md) var(--spacing-sm);
-  color: #555;
+  color: var(--color-muted);
   font-size: 0.9rem;
   line-height: 1.6;
 }
@@ -191,4 +151,19 @@
 /* When item is open, expand the answer */
 .accordion-item.open .accordion-answer {
   max-height: 200px;
+}
+
+/* Tablet and mobile */
+@media (max-width: 1024px) {
+  .feedback-form,
+  .faq-section {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .accordion-question {
+    font-size: 0.9rem;
+    padding: var(--spacing-sm);
+  }
 }

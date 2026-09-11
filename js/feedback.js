@@ -95,7 +95,7 @@ function saveFeedback(entry) {
 }
 
 
-// Handle form submission
+// Validate the form, save feedback, and show confirmation
 function handleSubmit() {
   if (validateForm() === false) {
     return;

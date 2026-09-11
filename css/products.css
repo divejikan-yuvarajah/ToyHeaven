@@ -2,15 +2,6 @@
    Toy Haven - Products page styles
    ============================================ */
 
-.products-page h1 {
-  margin-bottom: var(--spacing-xs);
-}
-
-.page-intro {
-  color: #555;
-  margin-bottom: var(--spacing-lg);
-}
-
 /* Search and filter area */
 .products-controls {
   display: flex;
@@ -90,7 +81,7 @@
   width: 100%;
   height: 180px;
   object-fit: cover;
-  background-color: #eee;
+  background-color: var(--color-image-bg);
 }
 
 .product-card-body {
@@ -123,63 +114,26 @@
   margin-top: auto;
 }
 
-.btn {
-  display: inline-block;
-  padding: var(--spacing-xs) var(--spacing-md);
-  border-radius: 6px;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.95rem;
-  text-align: center;
-  cursor: pointer;
-  border: none;
+.product-card .btn {
   width: 100%;
 }
 
-.btn-primary {
-  background-color: var(--color-accent);
-  color: var(--color-white);
-}
-
-.btn-primary:hover {
-  background-color: #e56a1f;
-}
-
-.btn-secondary {
-  background-color: var(--color-white);
-  color: var(--color-primary);
-  border: 1px solid var(--color-border);
+.product-card .btn-secondary {
   margin-top: var(--spacing-xs);
-}
-
-.btn-secondary:hover {
-  border-color: var(--color-primary);
-  background-color: rgba(46, 26, 71, 0.05);
 }
 
 /* No results message */
 .no-results {
   text-align: center;
-  color: #666;
+  color: var(--color-muted-light);
   padding: var(--spacing-lg);
 }
 
-/* Cart confirmation toast */
-.cart-toast {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  background-color: var(--color-primary);
-  color: var(--color-white);
-  padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: 6px;
-  box-shadow: var(--shadow-md);
-  font-size: 0.95rem;
-  z-index: 200;
-}
-
-.cart-toast.show {
-  display: block;
+/* Tablet */
+@media (max-width: 1024px) {
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
 }
 
 /* Mobile */
@@ -188,10 +142,7 @@
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   }
 
-  .cart-toast {
-    left: var(--spacing-sm);
-    right: var(--spacing-sm);
-    bottom: var(--spacing-sm);
-    text-align: center;
+  .search-input {
+    max-width: 100%;
   }
 }
