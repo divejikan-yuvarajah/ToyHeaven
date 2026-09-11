@@ -1,4 +1,4 @@
-var CACHE_NAME = 'toy-haven-v5';
+var CACHE_NAME = 'toy-haven-v6';
 
 var urlsToCache = [
   'index.html',
