@@ -116,17 +116,25 @@ function createProductCard(product) {
   price.className = 'product-price';
   price.textContent = '$' + product.price.toFixed(2);
 
-  var button = document.createElement('button');
-  button.className = 'btn btn-primary';
-  button.textContent = 'Add to Cart';
-  button.addEventListener('click', function () {
+  var cartButton = document.createElement('button');
+  cartButton.className = 'btn btn-primary';
+  cartButton.textContent = 'Add to Cart';
+  cartButton.addEventListener('click', function () {
     addToCart(product.id, product.name);
+  });
+
+  var wishlistButton = document.createElement('button');
+  wishlistButton.className = 'btn btn-secondary';
+  wishlistButton.textContent = 'Add to Wishlist';
+  wishlistButton.addEventListener('click', function () {
+    addToWishlist(product.id, product.name);
   });
 
   body.appendChild(title);
   body.appendChild(category);
   body.appendChild(price);
-  body.appendChild(button);
+  body.appendChild(cartButton);
+  body.appendChild(wishlistButton);
 
   card.appendChild(img);
   card.appendChild(body);
@@ -161,6 +169,33 @@ function addToCart(productId, productName) {
 
   // Show confirmation message
   showCartToast(productName + ' added to cart!');
+}
+
+
+// Save product to wishlist in localStorage
+function addToWishlist(productId, productName) {
+  var wishlist = JSON.parse(localStorage.getItem('wishlist'));
+  if (wishlist === null) {
+    wishlist = [];
+  }
+
+  // Check if product is already in the wishlist
+  var found = false;
+  for (var i = 0; i < wishlist.length; i++) {
+    if (wishlist[i].id === productId) {
+      found = true;
+      break;
+    }
+  }
+
+  // Add new item if not found
+  if (found === false) {
+    wishlist.push({ id: productId, status: 'Interested' });
+    localStorage.setItem('wishlist', JSON.stringify(wishlist));
+    showCartToast(productName + ' added to wishlist!');
+  } else {
+    showCartToast(productName + ' is already in your wishlist.');
+  }
 }
 
 
