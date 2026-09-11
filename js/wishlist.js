@@ -1,31 +1,17 @@
-// Toy Haven - Wishlist page JavaScript
-// Displays saved wishlist items and lets user change status
-
 document.addEventListener('DOMContentLoaded', function () {
 
-  // Show wishlist items when the page loads
   renderWishlist();
 
 });
 
-
-// Read wishlist from localStorage
 function getWishlist() {
-  var wishlist = JSON.parse(localStorage.getItem('wishlist'));
-  if (wishlist === null) {
-    wishlist = [];
-  }
-  return wishlist;
+  return getStoredList('wishlist');
 }
 
-
-// Save wishlist back to localStorage
 function saveWishlist(wishlist) {
-  localStorage.setItem('wishlist', JSON.stringify(wishlist));
+  setStoredList('wishlist', wishlist);
 }
 
-
-// Find a product in PRODUCTS by its id
 function findProductById(id) {
   for (var i = 0; i < PRODUCTS.length; i++) {
     if (PRODUCTS[i].id === id) {
@@ -35,8 +21,6 @@ function findProductById(id) {
   return null;
 }
 
-
-// Update the status of a wishlist item
 function updateStatus(productId, newStatus) {
   var wishlist = getWishlist();
 
@@ -50,8 +34,6 @@ function updateStatus(productId, newStatus) {
   saveWishlist(wishlist);
 }
 
-
-// Draw all wishlist items on the page
 function renderWishlist() {
   var wishlist = getWishlist();
   var grid = document.getElementById('wishlist-grid');
@@ -70,27 +52,29 @@ function renderWishlist() {
 
   emptyMessage.hidden = true;
 
+  var shownItems = 0;
   for (var i = 0; i < wishlist.length; i++) {
     var item = wishlist[i];
     var product = findProductById(item.id);
 
-    // Skip if product not found in PRODUCTS
     if (product === null) {
       continue;
     }
 
     var card = createWishlistCard(product, item.status);
     grid.appendChild(card);
+    shownItems = shownItems + 1;
+  }
+
+  if (shownItems === 0) {
+    emptyMessage.hidden = false;
   }
 }
 
-
-// Build one wishlist card
 function createWishlistCard(product, status) {
   var card = document.createElement('div');
   card.className = 'wishlist-card';
 
-  // Product image with descriptive alt text for accessibility
   var img = document.createElement('img');
   img.src = product.image;
   img.alt = product.name + ' - ' + product.category;
@@ -110,7 +94,6 @@ function createWishlistCard(product, status) {
   select.className = 'status-select';
   select.id = 'status-' + product.id;
 
-  // The three status options
   var statuses = ['Interested', 'Owned', 'Not Interested'];
   for (var i = 0; i < statuses.length; i++) {
     var option = document.createElement('option');
@@ -122,7 +105,6 @@ function createWishlistCard(product, status) {
     select.appendChild(option);
   }
 
-  // Update localStorage when dropdown changes
   select.addEventListener('change', function () {
     updateStatus(product.id, this.value);
   });

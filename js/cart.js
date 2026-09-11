@@ -1,12 +1,7 @@
-// Toy Haven - Cart page JavaScript
-// Reads cart from localStorage and displays items with quantity controls
-
 document.addEventListener('DOMContentLoaded', function () {
 
-  // Draw the cart when the page loads
   renderCart();
 
-  // Clear Cart button
   var clearBtn = document.getElementById('clear-cart-btn');
   if (clearBtn) {
     clearBtn.addEventListener('click', clearCart);
@@ -14,24 +9,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
-
-// Read the cart array from localStorage
 function getCart() {
-  var cart = JSON.parse(localStorage.getItem('cart'));
-  if (cart === null) {
-    cart = [];
-  }
-  return cart;
+  return getStoredList('cart');
 }
 
-
-// Save the cart array back to localStorage
 function saveCart(cart) {
-  localStorage.setItem('cart', JSON.stringify(cart));
+  setStoredList('cart', cart);
 }
 
-
-// Find a product in PRODUCTS by its id
 function findProductById(id) {
   for (var i = 0; i < PRODUCTS.length; i++) {
     if (PRODUCTS[i].id === id) {
@@ -41,8 +26,6 @@ function findProductById(id) {
   return null;
 }
 
-
-// Calculate the total price of all items in the cart
 function calculateTotal(cart) {
   var total = 0;
 
@@ -56,8 +39,6 @@ function calculateTotal(cart) {
   return total;
 }
 
-
-// Update the quantity of a product (+1 or -1)
 function updateQuantity(productId, change) {
   var cart = getCart();
 
@@ -65,7 +46,6 @@ function updateQuantity(productId, change) {
     if (cart[i].id === productId) {
       cart[i].quantity = cart[i].quantity + change;
 
-      // Remove item if quantity reaches 0 or below
       if (cart[i].quantity <= 0) {
         cart.splice(i, 1);
       }
@@ -77,8 +57,6 @@ function updateQuantity(productId, change) {
   renderCart();
 }
 
-
-// Draw all cart items and the summary total on the page
 function renderCart() {
   var cart = getCart();
   var itemsContainer = document.getElementById('cart-items');
@@ -90,10 +68,8 @@ function renderCart() {
     return;
   }
 
-  // Clear old items
   itemsContainer.innerHTML = '';
 
-  // Show empty message or cart content
   if (cart.length === 0) {
     emptyCart.hidden = false;
     cartContent.hidden = true;
@@ -103,12 +79,11 @@ function renderCart() {
   emptyCart.hidden = true;
   cartContent.hidden = false;
 
-  // Build a row for each cart item
+  var shownItems = 0;
   for (var i = 0; i < cart.length; i++) {
     var cartItem = cart[i];
     var product = findProductById(cartItem.id);
 
-    // Skip if product not found in PRODUCTS
     if (product === null) {
       continue;
     }
@@ -116,25 +91,27 @@ function renderCart() {
     var subtotal = product.price * cartItem.quantity;
     var row = createCartItemRow(product, cartItem.quantity, subtotal);
     itemsContainer.appendChild(row);
+    shownItems = shownItems + 1;
   }
 
-  // Update the total price in the summary box
+  if (shownItems === 0) {
+    emptyCart.hidden = false;
+    cartContent.hidden = true;
+    return;
+  }
+
   var total = calculateTotal(cart);
   totalElement.textContent = '$' + total.toFixed(2);
 }
 
-
-// Build one cart item row
 function createCartItemRow(product, quantity, subtotal) {
   var row = document.createElement('div');
   row.className = 'cart-item';
 
-  // Product image with descriptive alt text for accessibility
   var img = document.createElement('img');
   img.src = product.image;
   img.alt = product.name + ' product image';
 
-  // Name and unit price
   var details = document.createElement('div');
   details.className = 'cart-item-details';
 
@@ -148,12 +125,12 @@ function createCartItemRow(product, quantity, subtotal) {
   details.appendChild(name);
   details.appendChild(unitPrice);
 
-  // Quantity + and - buttons
   var qtyControls = document.createElement('div');
   qtyControls.className = 'quantity-controls';
 
   var minusBtn = document.createElement('button');
   minusBtn.className = 'qty-btn';
+  minusBtn.type = 'button';
   minusBtn.textContent = '-';
   minusBtn.setAttribute('aria-label', 'Decrease quantity');
   minusBtn.addEventListener('click', function () {
@@ -166,6 +143,7 @@ function createCartItemRow(product, quantity, subtotal) {
 
   var plusBtn = document.createElement('button');
   plusBtn.className = 'qty-btn';
+  plusBtn.type = 'button';
   plusBtn.textContent = '+';
   plusBtn.setAttribute('aria-label', 'Increase quantity');
   plusBtn.addEventListener('click', function () {
@@ -176,7 +154,6 @@ function createCartItemRow(product, quantity, subtotal) {
   qtyControls.appendChild(qtyDisplay);
   qtyControls.appendChild(plusBtn);
 
-  // Subtotal for this line
   var subtotalEl = document.createElement('p');
   subtotalEl.className = 'cart-item-subtotal';
   subtotalEl.textContent = '$' + subtotal.toFixed(2);
@@ -189,8 +166,6 @@ function createCartItemRow(product, quantity, subtotal) {
   return row;
 }
 
-
-// Clear the entire cart after user confirms
 function clearCart() {
   var confirmed = confirm('Are you sure you want to clear your cart?');
   if (confirmed) {

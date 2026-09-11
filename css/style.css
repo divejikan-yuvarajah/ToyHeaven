@@ -1,11 +1,5 @@
-/* ============================================
-   Toy Haven - Shared base styles
-   ============================================ */
-
-/* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap');
 
-/* Color palette and spacing */
 :root {
   --color-primary: #2E1A47;
   --color-accent: #FF7A29;
@@ -36,7 +30,6 @@
   --nav-height: 64px;
 }
 
-/* Basic reset */
 *,
 *::before,
 *::after {
@@ -47,6 +40,7 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -58,6 +52,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 img {
@@ -84,7 +79,6 @@ h1, h2, h3, h4 {
   color: var(--color-primary);
 }
 
-/* Main content area grows to push footer down */
 main {
   flex: 1;
   width: 100%;
@@ -93,7 +87,6 @@ main {
   padding: var(--spacing-lg) var(--spacing-sm);
 }
 
-/* Shared page heading styles used on all inner pages */
 main h1 {
   margin-bottom: var(--spacing-xs);
 }
@@ -108,7 +101,6 @@ main h1 {
   text-align: center;
 }
 
-/* Shared button styles used across pages */
 .btn {
   display: inline-block;
   padding: var(--spacing-xs) var(--spacing-md);
@@ -144,7 +136,6 @@ main h1 {
   color: var(--color-primary);
 }
 
-/* Shared empty-state box (cart, wishlist, checkout) */
 .empty-state {
   text-align: center;
   padding: var(--spacing-xl) var(--spacing-sm);
@@ -160,7 +151,6 @@ main h1 {
   font-size: 1.05rem;
 }
 
-/* Shared inline form error text */
 .error-text {
   display: block;
   color: var(--color-error);
@@ -174,7 +164,6 @@ main h1 {
   border-color: var(--color-error);
 }
 
-/* Shared toast notification (cart, wishlist on products/home) */
 .cart-toast {
   position: fixed;
   bottom: 24px;
@@ -188,10 +177,6 @@ main h1 {
   z-index: 200;
 }
 
-/* ============================================
-   Header & Navigation
-   ============================================ */
-
 .site-header {
   position: sticky;
   top: 0;
@@ -199,9 +184,12 @@ main h1 {
   background-color: var(--color-white);
   border-bottom: 1px solid var(--color-border);
   box-shadow: var(--shadow-sm);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 }
 
 .nav-container {
+  position: relative;
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 var(--spacing-sm);
@@ -222,15 +210,14 @@ main h1 {
   color: var(--color-accent);
 }
 
-/* Hamburger button - hidden on desktop */
 .nav-toggle {
   display: none;
   flex-direction: column;
   justify-content: center;
   gap: 5px;
-  width: 40px;
-  height: 40px;
-  padding: 8px;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
   background: none;
   border: 1px solid var(--color-border);
   border-radius: 6px;
@@ -246,7 +233,6 @@ main h1 {
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-/* Turn hamburger into an X when menu is open */
 .nav-toggle.is-open span:nth-child(1) {
   transform: translateY(7px) rotate(45deg);
 }
@@ -259,7 +245,6 @@ main h1 {
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* Nav links */
 .nav-menu {
   display: flex;
   align-items: center;
@@ -279,8 +264,11 @@ main h1 {
   background-color: rgba(255, 122, 41, 0.1);
 }
 
-/* Mobile navigation */
 @media (max-width: 768px) {
+  .nav-container {
+    position: static;
+  }
+
   .nav-toggle {
     display: flex;
   }
@@ -290,30 +278,28 @@ main h1 {
     flex-direction: column;
     align-items: stretch;
     position: absolute;
-    top: var(--nav-height);
+    top: 100%;
     left: 0;
     right: 0;
+    width: 100%;
     background-color: var(--color-white);
     border-bottom: 1px solid var(--color-border);
     box-shadow: var(--shadow-md);
     padding: var(--spacing-sm);
     gap: var(--spacing-xs);
+    z-index: 101;
   }
 
-  /* Show menu when open */
   .nav-menu.is-open {
     display: flex;
   }
 
   .nav-menu a {
-    padding: var(--spacing-sm);
+    padding: 0.85rem var(--spacing-sm);
     text-align: center;
+    font-size: 1rem;
   }
 }
-
-/* ============================================
-   Footer
-   ============================================ */
 
 .site-footer {
   background-color: var(--color-footer-bg);
@@ -425,11 +411,6 @@ main h1 {
   border-top: 1px solid var(--color-border);
 }
 
-/* ============================================
-   Responsive breakpoints (tablet + mobile)
-   ============================================ */
-
-/* Tablet */
 @media (max-width: 1024px) {
   main {
     padding: var(--spacing-lg) var(--spacing-md);
@@ -438,22 +419,34 @@ main h1 {
   .footer-container {
     gap: var(--spacing-md);
   }
+
+  .nav-menu {
+    gap: var(--spacing-xs);
+  }
 }
 
-/* Mobile */
 @media (max-width: 768px) {
   main {
     padding: var(--spacing-md) var(--spacing-sm);
+    padding-left: max(var(--spacing-sm), env(safe-area-inset-left));
+    padding-right: max(var(--spacing-sm), env(safe-area-inset-right));
   }
 
   main h1 {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
+  }
+
+  .btn {
+    min-height: 44px;
+    padding: 0.7rem var(--spacing-md);
   }
 
   .footer-container {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    padding-left: max(var(--spacing-sm), env(safe-area-inset-left));
+    padding-right: max(var(--spacing-sm), env(safe-area-inset-right));
   }
 
   .footer-brand,
@@ -468,13 +461,43 @@ main h1 {
   }
 
   .newsletter-form {
-    justify-content: center;
+    flex-direction: column;
+    justify-content: stretch;
+    width: 100%;
+  }
+
+  .newsletter-form input[type="email"],
+  .newsletter-form button {
+    width: 100%;
+    min-width: 0;
+    font-size: 16px;
+    min-height: 44px;
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: 16px;
   }
 
   .cart-toast {
     left: var(--spacing-sm);
     right: var(--spacing-sm);
-    bottom: var(--spacing-sm);
+    bottom: max(var(--spacing-sm), env(safe-area-inset-bottom));
     text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    font-size: 1.2rem;
+  }
+
+  main h1 {
+    font-size: 1.35rem;
+  }
+
+  .page-intro {
+    font-size: 0.95rem;
   }
 }

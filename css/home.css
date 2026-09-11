@@ -1,13 +1,8 @@
-/* ============================================
-   Toy Haven - Home page styles
-   ============================================ */
-
 .home-page {
   padding-top: 0;
   max-width: 100%;
 }
 
-/* Hero slider */
 .hero {
   position: relative;
   width: 100%;
@@ -38,9 +33,10 @@
   opacity: 0;
   transition: opacity 0.6s ease;
   overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
 }
 
-/* Banner image fills the slide behind the text */
 .hero-banner-img {
   position: absolute;
   top: 0;
@@ -54,6 +50,7 @@
 .hero-slide.active {
   opacity: 1;
   z-index: 1;
+  pointer-events: auto;
 }
 
 .hero-content {
@@ -79,7 +76,6 @@
   opacity: 0.95;
 }
 
-/* Dot indicators below the slider */
 .hero-dots {
   display: flex;
   justify-content: center;
@@ -101,7 +97,6 @@
   background-color: var(--color-accent);
 }
 
-/* Featured products section */
 .featured-section {
   max-width: 1100px;
   margin: 0 auto var(--spacing-xl);
@@ -123,7 +118,6 @@
   gap: var(--spacing-md);
 }
 
-/* Product card */
 .product-card {
   background-color: var(--color-white);
   border: 1px solid var(--color-border);
@@ -164,7 +158,6 @@
   width: 100%;
 }
 
-/* Call to action section */
 .cta-section {
   max-width: 1100px;
   margin: 0 auto var(--spacing-lg);
@@ -185,7 +178,6 @@
   margin-bottom: var(--spacing-md);
 }
 
-/* Tablet */
 @media (max-width: 1024px) {
   .featured-section,
   .cta-section,
@@ -195,21 +187,74 @@
   }
 
   .product-grid {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Mobile */
 @media (max-width: 768px) {
+  .home-page {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .hero {
+    padding-left: var(--spacing-sm);
+    padding-right: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+  }
+
   .hero-slider {
-    height: 280px;
+    height: 260px;
+  }
+
+  .hero-slide {
+    padding: var(--spacing-sm);
+  }
+
+  .hero-content {
+    padding: var(--spacing-sm);
+    max-width: 100%;
   }
 
   .hero-content h1 {
-    font-size: 1.5rem;
+    font-size: 1.35rem;
+  }
+
+  .hero-content p {
+    font-size: 0.95rem;
+  }
+
+  .featured-section,
+  .cta-section {
+    padding-left: var(--spacing-sm);
+    padding-right: var(--spacing-sm);
   }
 
   .product-grid {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm);
+  }
+
+  .product-card img {
+    height: 140px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-slider {
+    height: 220px;
+    border-radius: 6px;
+  }
+
+  .hero-content h1 {
+    font-size: 1.2rem;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-card img {
+    height: 180px;
   }
 }

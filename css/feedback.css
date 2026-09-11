@@ -1,8 +1,3 @@
-/* ============================================
-   Toy Haven - Feedback page styles
-   ============================================ */
-
-/* Success confirmation message */
 .success-message {
   padding: var(--spacing-md);
   margin-bottom: var(--spacing-lg);
@@ -35,7 +30,6 @@
   }
 }
 
-/* Feedback form */
 .feedback-form {
   max-width: 600px;
   padding: var(--spacing-md);
@@ -82,7 +76,6 @@
   width: 100%;
 }
 
-/* FAQ accordion section */
 .faq-section {
   max-width: 600px;
 }
@@ -134,7 +127,6 @@
   flex-shrink: 0;
 }
 
-/* Answer is hidden by default using max-height */
 .accordion-answer {
   max-height: 0;
   overflow: hidden;
@@ -148,12 +140,10 @@
   line-height: 1.6;
 }
 
-/* When item is open, expand the answer */
 .accordion-item.open .accordion-answer {
   max-height: 200px;
 }
 
-/* Tablet and mobile */
 @media (max-width: 1024px) {
   .feedback-form,
   .faq-section {
@@ -162,8 +152,23 @@
 }
 
 @media (max-width: 768px) {
+  .feedback-form {
+    padding: var(--spacing-sm);
+  }
+
   .accordion-question {
     font-size: 0.9rem;
     padding: var(--spacing-sm);
+    min-height: 48px;
+  }
+
+  .accordion-item.open .accordion-answer {
+    max-height: 320px;
+  }
+}
+
+@media (max-width: 480px) {
+  .accordion-question {
+    font-size: 0.85rem;
   }
 }

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#2E1A47">
   <link rel="icon" href="icons/favicon.ico" type="image/x-icon">
   <link rel="manifest" href="manifest.json">
@@ -12,12 +12,12 @@
 </head>
 <body>
 
-  <!-- Header -->
+  
   <header class="site-header">
     <nav class="nav-container">
       <a href="index.html" class="logo">Toy Haven</a>
 
-      <button class="nav-toggle" aria-label="Toggle navigation menu">
+      <button type="button" class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
         <span></span>
         <span></span>
         <span></span>
@@ -33,18 +33,18 @@
     </nav>
   </header>
 
-  <!-- Page content -->
+  
   <main class="feedback-page">
     <h1>Feedback</h1>
     <p class="page-intro">We would love to hear from you.</p>
 
-    <!-- Confirmation message after submit -->
+    
     <div id="success-message" class="success-message" hidden>
       <h2>Thank you!</h2>
       <p>Your feedback has been submitted. We appreciate you taking the time to share your thoughts.</p>
     </div>
 
-    <!-- Feedback form -->
+    
     <form id="feedback-form" class="feedback-form" novalidate>
       <h2>Send Us a Message</h2>
 
@@ -69,7 +69,7 @@
       <button type="submit" class="btn btn-primary">Submit Feedback</button>
     </form>
 
-    <!-- FAQ accordion section -->
+    
     <section class="faq-section">
       <h2>Frequently Asked Questions</h2>
 
@@ -129,7 +129,7 @@
     </section>
   </main>
 
-  <!-- Footer -->
+  
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-brand">
@@ -163,6 +163,7 @@
     </div>
   </footer>
 
+  <script src="js/utils.js"></script>
   <script src="js/nav.js"></script>
   <script src="js/feedback.js"></script>
 </body>

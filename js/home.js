@@ -1,49 +1,43 @@
-// Toy Haven - Home page JavaScript
-// Handles the hero banner slider and featured products section
-
 document.addEventListener('DOMContentLoaded', function () {
 
-  // ---- Hero Banner Slider ----
-
-  // Get all slides and dot buttons
   var slides = document.querySelectorAll('.hero-slide');
   var dots = document.querySelectorAll('.hero-dot');
   var currentSlide = 0;
 
-  // Function to show a specific slide by its index number
   function showSlide(index) {
-    // Loop back to the start if we go past the last slide
+    if (slides.length === 0) {
+      return;
+    }
     if (index >= slides.length) {
       index = 0;
     }
-    // Loop to the end if we go before the first slide
     if (index < 0) {
       index = slides.length - 1;
     }
 
-    // Remove "active" from all slides and dots
     for (var i = 0; i < slides.length; i++) {
       slides[i].classList.remove('active');
-      dots[i].classList.remove('active');
+      if (dots[i]) {
+        dots[i].classList.remove('active');
+      }
     }
 
-    // Add "active" to the current slide and dot
     slides[index].classList.add('active');
-    dots[index].classList.add('active');
+    if (dots[index]) {
+      dots[index].classList.add('active');
+    }
 
-    // Remember which slide we are on
     currentSlide = index;
   }
 
-  // Auto-change slides every 4 seconds
-  setInterval(function () {
-    showSlide(currentSlide + 1);
-  }, 4000);
+  if (slides.length > 0) {
+    setInterval(function () {
+      showSlide(currentSlide + 1);
+    }, 4000);
+  }
 
-  // Allow users to click dots to jump to a slide
   for (var d = 0; d < dots.length; d++) {
     dots[d].addEventListener('click', function () {
-      // Find which dot was clicked
       var dotIndex = 0;
       for (var j = 0; j < dots.length; j++) {
         if (dots[j] === this) {
@@ -55,16 +49,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-
-  // ---- Featured Products ----
-
   var featuredContainer = document.getElementById('featured-products');
 
   if (!featuredContainer) {
     return;
   }
 
-  // Find products where featured is true
   var featuredProducts = [];
   for (var p = 0; p < PRODUCTS.length; p++) {
     if (PRODUCTS[p].featured === true) {
@@ -72,7 +62,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // Create a card for each featured product
   for (var f = 0; f < featuredProducts.length; f++) {
     var product = featuredProducts[f];
     var card = createProductCard(product);
@@ -81,13 +70,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
-
-// Build one product card element for the featured section
 function createProductCard(product) {
   var card = document.createElement('div');
   card.className = 'product-card';
 
-  // Product image with descriptive alt text for accessibility
   var img = document.createElement('img');
   img.src = product.image;
   img.alt = product.name + ' - ' + product.category;
@@ -119,15 +105,9 @@ function createProductCard(product) {
   return card;
 }
 
-
-// Add a product to the cart in localStorage
 function addToCart(productId, productName) {
-  var cart = JSON.parse(localStorage.getItem('cart'));
-  if (cart === null) {
-    cart = [];
-  }
+  var cart = getStoredList('cart');
 
-  // Check if this product is already in the cart
   var found = false;
   for (var i = 0; i < cart.length; i++) {
     if (cart[i].id === productId) {
@@ -137,19 +117,15 @@ function addToCart(productId, productName) {
     }
   }
 
-  // If not found, add it as a new item
   if (found === false) {
     cart.push({ id: productId, quantity: 1 });
   }
 
-  localStorage.setItem('cart', JSON.stringify(cart));
+  setStoredList('cart', cart);
 
-  // Show a small confirmation message (same style as products page)
   showToast(productName + ' added to cart!');
 }
 
-
-// Show a small message at the bottom of the screen
 function showToast(message) {
   var toast = document.getElementById('cart-toast');
   if (!toast) {
@@ -159,7 +135,6 @@ function showToast(message) {
   toast.textContent = message;
   toast.hidden = false;
 
-  // Hide the message after 2.5 seconds
   setTimeout(function () {
     toast.hidden = true;
   }, 2500);

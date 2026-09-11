@@ -1,9 +1,4 @@
-// Toy Haven - Product data
-// 20 sample products across 4 categories
-// Used by home, products, cart, checkout, and wishlist pages
-
 const PRODUCTS = [
-  // Figurines
   {
     id: 1,
     name: "Super Hero Action Figure",
@@ -55,7 +50,6 @@ const PRODUCTS = [
     stock: 20
   },
 
-  // Toys
   {
     id: 6,
     name: "Building Blocks Set (100 pcs)",
@@ -107,7 +101,6 @@ const PRODUCTS = [
     stock: 60
   },
 
-  // Board Games
   {
     id: 11,
     name: "Family Trivia Night",
@@ -159,7 +152,6 @@ const PRODUCTS = [
     stock: 14
   },
 
-  // Diecast Cars
   {
     id: 16,
     name: "Classic Red Sports Car",

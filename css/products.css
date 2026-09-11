@@ -1,8 +1,3 @@
-/* ============================================
-   Toy Haven - Products page styles
-   ============================================ */
-
-/* Search and filter area */
 .products-controls {
   display: flex;
   flex-direction: column;
@@ -53,14 +48,12 @@
   color: var(--color-white);
 }
 
-/* Product grid */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: var(--spacing-md);
 }
 
-/* Product card */
 .product-card {
   background-color: var(--color-white);
   border: 1px solid var(--color-border);
@@ -122,27 +115,67 @@
   margin-top: var(--spacing-xs);
 }
 
-/* No results message */
 .no-results {
   text-align: center;
   color: var(--color-muted-light);
   padding: var(--spacing-lg);
 }
 
-/* Tablet */
 @media (max-width: 1024px) {
   .products-grid {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Mobile */
 @media (max-width: 768px) {
   .products-grid {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm);
   }
 
   .search-input {
     max-width: 100%;
+    min-height: 44px;
+    font-size: 16px;
+  }
+
+  .filter-bar {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: var(--spacing-xs);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .filter-btn {
+    flex: 0 0 auto;
+    min-height: 40px;
+    white-space: nowrap;
+  }
+
+  .product-card img {
+    height: 140px;
+  }
+
+  .product-card:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-bar {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+
+  .filter-btn {
+    flex: 1 1 calc(50% - 0.5rem);
+  }
+
+  .product-card img {
+    height: 180px;
   }
 }

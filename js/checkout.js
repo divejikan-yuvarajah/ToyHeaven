@@ -1,12 +1,7 @@
-// Toy Haven - Checkout page JavaScript
-// Form validation, order summary, and saving orders to localStorage
-
 document.addEventListener('DOMContentLoaded', function () {
 
-  // Show order summary from cart
   renderOrderSummary();
 
-  // Handle form submit
   var form = document.getElementById('checkout-form');
   if (form) {
     form.addEventListener('submit', function (event) {
@@ -17,18 +12,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
-
-// Read cart from localStorage
 function getCart() {
-  var cart = JSON.parse(localStorage.getItem('cart'));
-  if (cart === null) {
-    cart = [];
-  }
-  return cart;
+  return getStoredList('cart');
 }
 
-
-// Find a product by id in PRODUCTS
 function findProductById(id) {
   for (var i = 0; i < PRODUCTS.length; i++) {
     if (PRODUCTS[i].id === id) {
@@ -38,8 +25,6 @@ function findProductById(id) {
   return null;
 }
 
-
-// Calculate total price for the cart
 function calculateTotal(cart) {
   var total = 0;
   for (var i = 0; i < cart.length; i++) {
@@ -51,14 +36,16 @@ function calculateTotal(cart) {
   return total;
 }
 
-
-// Display order summary items and total
 function renderOrderSummary() {
   var cart = getCart();
   var itemsList = document.getElementById('summary-items');
   var totalElement = document.getElementById('summary-total');
   var checkoutContent = document.getElementById('checkout-content');
   var emptyCheckout = document.getElementById('empty-checkout');
+
+  if (!checkoutContent || !emptyCheckout || !itemsList) {
+    return;
+  }
 
   if (cart.length === 0) {
     checkoutContent.hidden = true;
@@ -70,7 +57,7 @@ function renderOrderSummary() {
   emptyCheckout.hidden = true;
   itemsList.innerHTML = '';
 
-  // Add each cart item to the summary list
+  var shownItems = 0;
   for (var i = 0; i < cart.length; i++) {
     var product = findProductById(cart[i].id);
     if (product === null) {
@@ -97,14 +84,19 @@ function renderOrderSummary() {
     li.appendChild(qtySpan);
     li.appendChild(priceSpan);
     itemsList.appendChild(li);
+    shownItems = shownItems + 1;
+  }
+
+  if (shownItems === 0) {
+    checkoutContent.hidden = true;
+    emptyCheckout.hidden = false;
+    return;
   }
 
   var total = calculateTotal(cart);
   totalElement.textContent = '$' + total.toFixed(2);
 }
 
-
-// Clear all error messages
 function clearErrors() {
   var errorFields = document.querySelectorAll('.error-text');
   for (var i = 0; i < errorFields.length; i++) {
@@ -117,8 +109,6 @@ function clearErrors() {
   }
 }
 
-
-// Show an error message under a field
 function showError(fieldId, errorId, message) {
   var field = document.getElementById(fieldId);
   var errorEl = document.getElementById(errorId);
@@ -131,15 +121,11 @@ function showError(fieldId, errorId, message) {
   }
 }
 
-
-// Simple check if email looks valid
 function isValidEmail(email) {
   var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailPattern.test(email);
 }
 
-
-// Get the selected payment method radio button value
 function getPaymentMethod() {
   var radios = document.querySelectorAll('input[name="paymentMethod"]');
   for (var i = 0; i < radios.length; i++) {
@@ -150,8 +136,6 @@ function getPaymentMethod() {
   return '';
 }
 
-
-// Validate all form fields - returns true if everything is OK
 function validateForm() {
   clearErrors();
   var isValid = true;
@@ -161,13 +145,11 @@ function validateForm() {
   var address = document.getElementById('address').value.trim();
   var paymentMethod = getPaymentMethod();
 
-  // Full Name - required
   if (fullName === '') {
     showError('full-name', 'error-full-name', 'Full name is required.');
     isValid = false;
   }
 
-  // Email - required and must look valid
   if (email === '') {
     showError('email', 'error-email', 'Email is required.');
     isValid = false;
@@ -176,13 +158,11 @@ function validateForm() {
     isValid = false;
   }
 
-  // Address - required
   if (address === '') {
     showError('address', 'error-address', 'Delivery address is required.');
     isValid = false;
   }
 
-  // Payment method - must pick one
   if (paymentMethod === '') {
     showError('', 'error-payment', 'Please select a payment method.');
     isValid = false;
@@ -191,8 +171,6 @@ function validateForm() {
   return isValid;
 }
 
-
-// Build order object with items and customer details
 function buildOrder(fullName, email, address, paymentMethod) {
   var cart = getCart();
   var items = [];
@@ -221,21 +199,13 @@ function buildOrder(fullName, email, address, paymentMethod) {
   };
 }
 
-
-// Save order to orderHistory in localStorage
 function saveOrder(order) {
-  var history = JSON.parse(localStorage.getItem('orderHistory'));
-  if (history === null) {
-    history = [];
-  }
+  var history = getStoredList('orderHistory');
   history.push(order);
-  localStorage.setItem('orderHistory', JSON.stringify(history));
+  setStoredList('orderHistory', history);
 }
 
-
-// Validate the form, save the order, clear cart, and show success
 function handleSubmit() {
-  // Stop if validation fails
   if (validateForm() === false) {
     return;
   }
@@ -250,14 +220,11 @@ function handleSubmit() {
   var address = document.getElementById('address').value.trim();
   var paymentMethod = getPaymentMethod();
 
-  // Build and save the order
   var order = buildOrder(fullName, email, address, paymentMethod);
   saveOrder(order);
 
-  // Clear the cart
-  localStorage.setItem('cart', JSON.stringify([]));
+  setStoredList('cart', []);
 
-  // Hide form and show success message
   document.getElementById('checkout-content').hidden = true;
   document.getElementById('success-message').hidden = false;
 }

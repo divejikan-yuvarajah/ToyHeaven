@@ -1,9 +1,5 @@
-// Toy Haven - Simple service worker
-// Uses a cache-first strategy for core site files
+var CACHE_NAME = 'toy-haven-v5';
 
-var CACHE_NAME = 'toy-haven-v3';
-
-// List of files to cache for offline use
 var urlsToCache = [
   'index.html',
   'products.html',
@@ -57,23 +53,45 @@ var urlsToCache = [
   'images/products/20-fire-rescue-truck.png'
 ];
 
-// Install event: runs once when the service worker is first installed
 self.addEventListener('install', function (event) {
   event.waitUntil(
     caches.open(CACHE_NAME).then(function (cache) {
       return cache.addAll(urlsToCache);
+    }).then(function () {
+      return self.skipWaiting();
     })
   );
 });
 
-// Fetch event: try cache first, then network if not found (cache-first strategy)
+self.addEventListener('activate', function (event) {
+  event.waitUntil(
+    caches.keys().then(function (cacheNames) {
+      var deleteOld = [];
+      for (var i = 0; i < cacheNames.length; i++) {
+        if (cacheNames[i] !== CACHE_NAME) {
+          deleteOld.push(caches.delete(cacheNames[i]));
+        }
+      }
+      return Promise.all(deleteOld);
+    }).then(function () {
+      return self.clients.claim();
+    })
+  );
+});
+
 self.addEventListener('fetch', function (event) {
+  if (event.request.method !== 'GET') {
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request).then(function (cachedResponse) {
       if (cachedResponse) {
         return cachedResponse;
       }
       return fetch(event.request);
+    }).catch(function () {
+      return caches.match('index.html');
     })
   );
 });

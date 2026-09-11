@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#2E1A47">
   <link rel="icon" href="icons/favicon.ico" type="image/x-icon">
   <link rel="manifest" href="manifest.json">
@@ -12,12 +12,12 @@
 </head>
 <body>
 
-  <!-- Header -->
+  
   <header class="site-header">
     <nav class="nav-container">
       <a href="index.html" class="logo">Toy Haven</a>
 
-      <button class="nav-toggle" aria-label="Toggle navigation menu">
+      <button type="button" class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
         <span></span>
         <span></span>
         <span></span>
@@ -33,10 +33,10 @@
     </nav>
   </header>
 
-  <!-- Page content -->
+  
   <main class="home-page">
 
-    <!-- Hero banner slider -->
+    
     <section class="hero">
       <div class="hero-slider">
 
@@ -78,25 +78,25 @@
 
       </div>
 
-      <!-- Small dots to show which slide is active -->
+      
       <div class="hero-dots">
-        <button class="hero-dot active" aria-label="Slide 1"></button>
-        <button class="hero-dot" aria-label="Slide 2"></button>
-        <button class="hero-dot" aria-label="Slide 3"></button>
-        <button class="hero-dot" aria-label="Slide 4"></button>
+        <button type="button" class="hero-dot active" aria-label="Slide 1"></button>
+        <button type="button" class="hero-dot" aria-label="Slide 2"></button>
+        <button type="button" class="hero-dot" aria-label="Slide 3"></button>
+        <button type="button" class="hero-dot" aria-label="Slide 4"></button>
       </div>
     </section>
 
-    <!-- Featured products -->
+    
     <section class="featured-section">
       <h2>Featured Products</h2>
       <p class="section-intro">Hand-picked favourites from our store.</p>
       <div id="featured-products" class="product-grid">
-        <!-- Product cards are added here by home.js -->
+
       </div>
     </section>
 
-    <!-- Call to action -->
+    
     <section class="cta-section">
       <h2>Explore Our Full Range</h2>
       <p>Browse all 20 products across figurines, toys, board games, and diecast cars.</p>
@@ -105,10 +105,10 @@
 
   </main>
 
-  <!-- Confirmation message for add to cart -->
+  
   <div id="cart-toast" class="cart-toast" hidden></div>
 
-  <!-- Footer -->
+  
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-brand">
@@ -143,6 +143,7 @@
   </footer>
 
   <script src="js/data.js"></script>
+  <script src="js/utils.js"></script>
   <script src="js/nav.js"></script>
   <script src="js/home.js"></script>
 </body>

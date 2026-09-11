@@ -1,9 +1,5 @@
-// Toy Haven - Feedback page JavaScript
-// Form validation, saving feedback, and FAQ accordion
-
 document.addEventListener('DOMContentLoaded', function () {
 
-  // Handle feedback form submit
   var form = document.getElementById('feedback-form');
   if (form) {
     form.addEventListener('submit', function (event) {
@@ -12,13 +8,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Set up the FAQ accordion
   setupAccordion();
 
 });
 
-
-// Clear all error messages
 function clearErrors() {
   var errorFields = document.querySelectorAll('.error-text');
   for (var i = 0; i < errorFields.length; i++) {
@@ -31,8 +24,6 @@ function clearErrors() {
   }
 }
 
-
-// Show an error message under a field
 function showError(fieldId, errorId, message) {
   var field = document.getElementById(fieldId);
   var errorEl = document.getElementById(errorId);
@@ -45,15 +36,11 @@ function showError(fieldId, errorId, message) {
   }
 }
 
-
-// Simple check if email looks valid
 function isValidEmail(email) {
   var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailPattern.test(email);
 }
 
-
-// Validate all form fields
 function validateForm() {
   clearErrors();
   var isValid = true;
@@ -83,19 +70,12 @@ function validateForm() {
   return isValid;
 }
 
-
-// Save feedback entry to localStorage
 function saveFeedback(entry) {
-  var list = JSON.parse(localStorage.getItem('feedbackList'));
-  if (list === null) {
-    list = [];
-  }
+  var list = getStoredList('feedbackList');
   list.push(entry);
-  localStorage.setItem('feedbackList', JSON.stringify(list));
+  setStoredList('feedbackList', list);
 }
 
-
-// Validate the form, save feedback, and show confirmation
 function handleSubmit() {
   if (validateForm() === false) {
     return;
@@ -110,30 +90,29 @@ function handleSubmit() {
 
   saveFeedback(entry);
 
-  // Hide form and show confirmation
   document.getElementById('feedback-form').hidden = true;
   document.getElementById('success-message').hidden = false;
 }
 
-
-// Set up FAQ accordion click handlers
 function setupAccordion() {
   var questions = document.querySelectorAll('.accordion-question');
 
   for (var i = 0; i < questions.length; i++) {
     questions[i].addEventListener('click', function () {
-      // Find the parent accordion item
       var item = this.parentElement;
       var icon = this.querySelector('.accordion-icon');
 
-      // Toggle the "open" class to show or hide the answer
       var isOpen = item.classList.contains('open');
       if (isOpen) {
         item.classList.remove('open');
-        icon.textContent = '+';
+        if (icon) {
+          icon.textContent = '+';
+        }
       } else {
         item.classList.add('open');
-        icon.textContent = '-';
+        if (icon) {
+          icon.textContent = '-';
+        }
       }
     });
   }
