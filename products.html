@@ -31,10 +31,38 @@
   </header>
 
   <!-- Page content -->
-  <main>
+  <main class="products-page">
     <h1>Our Products</h1>
-    <p>Browse our collection of toys and games.</p>
+    <p class="page-intro">Browse our collection of toys and games.</p>
+
+    <!-- Search and filter controls -->
+    <div class="products-controls">
+      <input
+        type="text"
+        id="search-input"
+        class="search-input"
+        placeholder="Search by product name..."
+      >
+
+      <div class="filter-bar">
+        <button class="filter-btn active" data-category="All">All</button>
+        <button class="filter-btn" data-category="Figurines">Figurines</button>
+        <button class="filter-btn" data-category="Toys">Toys</button>
+        <button class="filter-btn" data-category="Board Games">Board Games</button>
+        <button class="filter-btn" data-category="Diecast Cars">Diecast Cars</button>
+      </div>
+    </div>
+
+    <!-- Product cards are rendered here by products.js -->
+    <div id="products-grid" class="products-grid"></div>
+
+    <p id="no-results" class="no-results" hidden>No products found. Try a different search or filter.</p>
   </main>
+
+  <!-- Small confirmation message (not an alert) -->
+  <div id="cart-toast" class="cart-toast" hidden>
+    Added to cart!
+  </div>
 
   <!-- Footer -->
   <footer class="site-footer">
@@ -70,6 +98,7 @@
     </div>
   </footer>
 
+  <script src="js/data.js"></script>
   <script src="js/nav.js"></script>
   <script src="js/products.js"></script>
 </body>
